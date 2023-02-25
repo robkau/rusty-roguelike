@@ -1,6 +1,19 @@
-#![deny(clippy::all, clippy::pedantic, clippy::restriction, clippy::nursery, clippy::cargo)]
-#![deny(future_incompatible, let_underscore, nonstandard_style, rust_2018_compatibility, rust_2018_idioms, rust_2021_compatibility)]
-#![warn(warnings,unused)]
+#![deny(
+    clippy::all,
+    clippy::pedantic,
+    clippy::restriction,
+    clippy::nursery,
+    clippy::cargo
+)]
+#![deny(
+    future_incompatible,
+    let_underscore,
+    nonstandard_style,
+    rust_2018_compatibility,
+    rust_2018_idioms,
+    rust_2021_compatibility
+)]
+#![warn(warnings, unused)]
 
 use bracket_lib::prelude::*;
 
@@ -19,8 +32,6 @@ mod prelude {
 
 use prelude::*;
 
-
-
 fn main() -> BError {
     let ctx = BTermBuilder::simple80x50()
         .with_title("Rusty Roguelike")
@@ -29,7 +40,6 @@ fn main() -> BError {
 
     main_loop(ctx, State::new())
 }
-
 
 struct State {
     map: Map,
@@ -44,7 +54,6 @@ impl GameState for State {
         self.player.render(ctx);
     }
 }
-
 
 impl State {
     fn new() -> Self {
