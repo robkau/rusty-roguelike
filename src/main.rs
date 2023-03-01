@@ -96,7 +96,7 @@ impl GameState for State {
         ctx.cls();
         self.resources.insert(ctx.key);
         self.systems.execute(&mut self.ecs, &mut self.resources);
-        // todo render draw buffer
+        render_draw_buffer(ctx).expect("Render error");
     }
 }
 
