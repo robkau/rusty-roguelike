@@ -1,3 +1,6 @@
+//! Documentation comment for rusty-roguelike game!
+
+//clippy lints
 #![deny(
     clippy::all,
     clippy::pedantic,
@@ -5,6 +8,7 @@
     clippy::nursery,
     clippy::cargo
 )]
+// lint groups
 #![deny(
     future_incompatible,
     let_underscore,
@@ -13,6 +17,25 @@
     rust_2018_idioms,
     rust_2021_compatibility
 )]
+// lints not in groups
+#![deny(
+    macro_use_extern_crate,
+    missing_abi,
+    missing_docs,
+    non_ascii_idents,
+    noop_method_call,
+    single_use_lifetimes,
+    trivial_casts,
+    trivial_numeric_casts,
+    unreachable_pub,
+    unsafe_code,
+    unsafe_op_in_unsafe_fn,
+    unused_crate_dependencies,
+    unused_lifetimes,
+    unused_results,
+    variant_size_differences
+)]
+// warning lint groups
 #![warn(warnings, unused)]
 
 use bracket_lib::prelude::*;
@@ -22,24 +45,27 @@ mod components;
 mod map;
 mod map_builder;
 mod spawner;
+mod systems;
 
 mod prelude {
-    pub use bracket_lib::prelude::*;
-    pub use legion::systems::CommandBuffer;
-    pub use legion::world::SubWorld;
-    pub use legion::*;
-    pub const SCREEN_WIDTH: i32 = 80;
-    pub const SCREEN_HEIGHT: i32 = 50;
-    pub const DISPLAY_WIDTH: i32 = SCREEN_WIDTH / 2;
-    pub const DISPLAY_HEIGHT: i32 = SCREEN_HEIGHT / 2;
-    pub use crate::camera::*;
-    pub use crate::components::*;
-    pub use crate::map::*;
-    pub use crate::map_builder::*;
-    pub use crate::spawner::*;
+    pub(crate) use bracket_lib::prelude::*;
+    pub(crate) use legion::systems::CommandBuffer;
+    pub(crate) use legion::world::SubWorld;
+    pub(crate) use legion::*;
+    pub(crate) const SCREEN_WIDTH: i32 = 80;
+    pub(crate) const SCREEN_HEIGHT: i32 = 50;
+    pub(crate) const DISPLAY_WIDTH: i32 = SCREEN_WIDTH / 2;
+    pub(crate) const DISPLAY_HEIGHT: i32 = SCREEN_HEIGHT / 2;
+    pub(crate) use crate::camera::*;
+    pub(crate) use crate::components::*;
+    pub(crate) use crate::map::*;
+    pub(crate) use crate::map_builder::*;
+    pub(crate) use crate::spawner::*;
+    pub(crate) use crate::systems::*;
 }
 
 use prelude::*;
+
 
 fn main() -> BError {
     let ctx = BTermBuilder::new()
@@ -68,7 +94,8 @@ impl GameState for State {
         ctx.cls();
         ctx.set_active_console(1);
         ctx.cls();
-        // todo execute systems
+        self.resources.insert(ctx.key);
+        self.systems.execute(&mut self.ecs, &mut self.resources);
         // todo render draw buffer
     }
 }

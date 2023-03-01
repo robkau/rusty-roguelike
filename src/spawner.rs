@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
-pub fn spawn_player(ecs: &mut World, pos: Point) {
-    ecs.push((
+pub(crate) fn spawn_player(ecs: &mut World, pos: Point) {
+    let _  = ecs.push((
         Player,
         pos,
         Render {

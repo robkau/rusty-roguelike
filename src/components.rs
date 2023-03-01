@@ -1,10 +1,10 @@
-pub use crate::prelude::*;
+pub(crate) use crate::prelude::*;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
-pub struct Render {
-    pub color: ColorPair,
-    pub glyph: FontCharType,
+pub(crate) struct Render {
+    pub(crate) color: ColorPair,
+    pub(crate) glyph: FontCharType,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
-pub struct Player;
+pub(crate) struct Player;
