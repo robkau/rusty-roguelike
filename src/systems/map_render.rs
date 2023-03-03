@@ -4,8 +4,8 @@ use crate::prelude::*;
 pub(crate) fn map_render(#[resource] map: &Map, #[resource] camera: &Camera) {
     let mut draw_batch = DrawBatch::new();
     let _ = draw_batch.target(0);
-    for y in camera.top_y ..= camera.bottom_y {
-        for x in camera.left_x ..= camera.right_x {
+    for y in camera.top_y..=camera.bottom_y {
+        for x in camera.left_x..=camera.right_x {
             let pt = Point::new(x, y);
             let offset = Point::new(camera.left_x, camera.top_y);
 
@@ -16,7 +16,7 @@ pub(crate) fn map_render(#[resource] map: &Map, #[resource] camera: &Camera) {
                     TileType::Wall => to_cp437('#'),
                 };
 
-                let _ = draw_batch.set(pt - offset, ColorPair::new(WHITE,BLACK), glyph);
+                let _ = draw_batch.set(pt - offset, ColorPair::new(WHITE, BLACK), glyph);
             }
         }
     }

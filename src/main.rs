@@ -47,6 +47,7 @@ mod map_builder;
 mod spawner;
 mod state;
 mod systems;
+mod turn_state;
 
 mod prelude {
     pub(crate) use bracket_lib::prelude::*;
@@ -64,10 +65,10 @@ mod prelude {
     pub(crate) use crate::spawner::*;
     pub(crate) use crate::state::*;
     pub(crate) use crate::systems::*;
+    pub(crate) use crate::turn_state::*;
 }
 
 use prelude::*;
-
 
 fn main() -> BError {
     let ctx = BTermBuilder::new()
@@ -83,4 +84,3 @@ fn main() -> BError {
 
     main_loop(ctx, State::new())
 }
-
