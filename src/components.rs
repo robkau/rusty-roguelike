@@ -11,3 +11,6 @@ pub(crate) struct Player;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub(crate) struct Enemy;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub(crate) struct MovingRandomly;

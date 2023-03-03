@@ -24,5 +24,6 @@ pub(crate) fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, po
                 _ => to_cp437('g'),
             }
         },
+        MovingRandomly,
     ));
 }
