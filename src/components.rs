@@ -20,3 +20,9 @@ pub(crate) struct WantsToMove {
     pub(crate) entity: Entity,
     pub(crate) destination: Point,
 }
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub(crate) struct Health {
+    pub(crate) current: i32,
+    pub(crate) max: i32,
+}
