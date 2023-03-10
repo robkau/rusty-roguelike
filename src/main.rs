@@ -28,7 +28,6 @@
     trivial_casts,
     trivial_numeric_casts,
     unreachable_pub,
-    unsafe_code,
     unsafe_op_in_unsafe_fn,
     unused_crate_dependencies,
     unused_lifetimes,
@@ -37,6 +36,7 @@
 )]
 // warning lint groups
 #![warn(warnings, unused)]
+#![forbid(unsafe_code)]
 
 use bracket_lib::prelude::*;
 
