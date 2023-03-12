@@ -1,8 +1,10 @@
 use crate::prelude::*;
 
 #[system]
-#[write_component(Point)]
+#[read_component(Point)]
 #[read_component(Player)]
+#[read_component(Enemy)]
+#[write_component(Health)]
 pub(crate) fn player_input(
     ecs: &mut SubWorld<'_>, // todo review https://doc.rust-lang.org/reference/lifetime-elision.html
     commands: &mut CommandBuffer,
@@ -26,6 +28,7 @@ pub(crate) fn player_input(
             .unwrap();
 
         let mut enemies = <(Entity, &Point)>::query().filter(component::<Enemy>());
+        let mut did_something = false;
         if delta.x != 0 || delta.y != 0 {
             let mut hit_something = false;
             enemies.iter(ecs)
@@ -34,6 +37,7 @@ pub(crate) fn player_input(
                 })
                 .for_each(|(entity, _)| {
                     hit_something = true;
+                    did_something = true;
 
                     let _ = commands.push(((), WantsToAttack{
                         attacker: player_entity,
@@ -42,12 +46,24 @@ pub(crate) fn player_input(
                 });
 
             if !hit_something {
+                did_something = true;
                 let _ = commands.push(((), WantsToMove {
                     entity: player_entity,
                     destination
                 }));
             }
         }
+
+        if !did_something {
+            if let Ok(mut health) = ecs.
+                entry_mut(player_entity)
+                .unwrap()
+                .get_component_mut::<Health>()
+            {
+                health.current = i32::min(health.max, health.current+1);
+            }
+        }
+
         *turn_state = TurnState::PlayerTurn;
     }
 }
