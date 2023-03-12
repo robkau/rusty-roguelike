@@ -10,13 +10,15 @@ pub(crate) struct State {
 
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
+        self.resources.insert(ctx.key);
         ctx.set_active_console(0);
+        self.resources.insert(Point::from_tuple(ctx.mouse_pos())); // mouse on world layer 0
         ctx.cls();
         ctx.set_active_console(1);
         ctx.cls();
         ctx.set_active_console(2);
         ctx.cls();
-        self.resources.insert(ctx.key);
+
 
         let current_state = self.resources.get::<TurnState>().unwrap().clone();
         match current_state {

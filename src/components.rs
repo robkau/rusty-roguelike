@@ -22,7 +22,16 @@ pub(crate) struct WantsToMove {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
+pub(crate) struct WantsToAttack {
+    pub(crate) attacker: Entity,
+    pub(crate) victim: Entity,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub(crate) struct Health {
     pub(crate) current: i32,
     pub(crate) max: i32,
 }
+
+#[derive(Clone, PartialEq)]
+pub(crate) struct Name (pub(crate) String);
